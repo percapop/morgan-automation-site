@@ -1,0 +1,968 @@
+/* =========================================================
+   Morgan Automation
+   1 Fonts · 2 Tokens · 3 Base · 4 Layout · 5 Components ·
+   6 Sections · 7 Responsive · 8 Motion
+   ========================================================= */
+
+/* ---------- 1. Fonts (self-hosted, no third-party requests) ---------- */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("assets/fonts/fraunces-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("assets/fonts/dm-sans-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 1000;
+  font-display: swap;
+}
+
+/* ---------- 2. Tokens ----------
+   The palette. Do not introduce any other colours.
+
+   Contrast rules:
+   - --red on --paper is ~3.2:1. Use it only for large headings (24px+, or 19px+ bold),
+     buttons, icons, underlines and focus rings. Never for body text.
+   - Buttons: solid --red with white (--on-red) text, 19px+ bold (~4:1, AA large).
+   - --coral and --lilac are decoration only: borders, markers, the halftone. */
+
+:root {
+  --paper: #efe7da;     /* warm beige: page background + halftone paper stock */
+  --red: #f03737;       /* primary accent + primary ink */
+  --coral: #eb7b5c;     /* duotone ink, decoration */
+  --lilac: #bb8dc1;     /* tertiary, used sparingly */
+  --green: #2f8a5b;     /* scroll-progress bar only (3.5:1 on paper) */
+  --ink: #2a1f29;       /* body text (13:1 on paper) */
+  --on-red: #ffffff;    /* text on red buttons only */
+
+  /* Ink ramp: tints of --ink */
+  --ink-2: #5a4d58;                        /* secondary text, 6.4:1 on paper */
+  --ink-line: rgba(42, 31, 41, 0.16);      /* 1px dividers */
+  --ink-line-strong: rgba(42, 31, 41, 0.55);
+
+  /* Paper on dark (--ink) backgrounds */
+  --paper-soft: rgba(239, 231, 218, 0.8);
+  --paper-line: rgba(239, 231, 218, 0.22);
+
+  --serif: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  /* Type scale */
+  --fs-body: 1.0625rem;                                   /* 17px */
+  --fs-small: 0.9rem;
+  --fs-lead: 1.25rem;                                     /* 20px */
+  --fs-h3: 1.25rem;
+  --fs-h2: clamp(1.6rem, 1.3rem + 1vw, 2.25rem);          /* 26 → 36px */
+  --fs-hero: clamp(2rem, 1rem + 3.6vw, 4rem);             /* 32 → 64px */
+  --fs-button: 1.1875rem;                                 /* 19px, bold: AA large text on red */
+
+  --gutter: 1rem;
+  --radius: 6px;
+  --header-h: 4.25rem;
+}
+
+/* ---------- 3. Base ---------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+h2 { font-size: var(--fs-h2); line-height: 1.15; letter-spacing: -0.02em; }
+h3, .h3 { font-size: var(--fs-h3); line-height: 1.25; letter-spacing: -0.01em; }
+
+p { margin: 0 0 1rem; }
+p:last-child { margin-bottom: 0; }
+ul, ol { margin: 0 0 1rem; }
+strong { font-weight: 600; }
+
+/* Links: ink text, red underline (red is never used for small text) */
+a {
+  color: var(--ink);
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+}
+a:hover { text-decoration-thickness: 3px; }
+
+/* In-text links that lead somewhere on the page: bolder, thicker red underline */
+.inline-link {
+  font-weight: 700;
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 0.25em;
+}
+.inline-link:hover { text-decoration-thickness: 4px; }
+
+:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+.icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lead { font-size: var(--fs-lead); line-height: 1.6; }
+
+/* ---------- 4. Layout ---------- */
+
+.container {
+  width: 100%;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section { padding: 4rem 0; }
+.section-roomy { padding: 5rem 0; }
+.rule-top { border-top: 1px solid var(--ink-line); }
+
+.prose { max-width: calc(40rem + 2 * var(--gutter)); }
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- 5. Components ---------- */
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--paper);
+  border-bottom: 1px solid var(--ink-line);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: var(--header-h);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 44px;
+  min-width: 44px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+.brand-mark { width: 2rem; height: 2rem; flex: none; }
+.mark-bg { fill: var(--ink); }
+.mark-m { fill: none; stroke: var(--paper); stroke-width: 44; stroke-linecap: round; stroke-linejoin: round; }
+.mark-dot { fill: var(--red); }
+.brand-text { display: none; }
+
+/* Scroll progress, next to the logo (top left). Only shown with JS. */
+.header-left { display: flex; align-items: center; gap: 0.9rem; min-width: 0; }
+.progress { display: none; }
+.js .progress { display: inline-flex; align-items: center; gap: 0.5rem; }
+.progress-track {
+  position: relative;
+  width: 3.5rem;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ink-line);
+  overflow: hidden;
+}
+.progress-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.progress-num {
+  min-width: 2.6em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.progress.is-done .progress-num { color: var(--ink); }
+
+/* Header right: language switcher + button */
+.header-right { display: flex; align-items: center; gap: 0.4rem; }
+
+/* Phones (< 30rem): logo + percentage on the left, globe + button on the right.
+   The progress bar becomes a thin full-width line along the header's bottom edge
+   (still filling from the top left). Everything is restored at 30rem. */
+.header-inner { gap: 0.5rem; }
+.header-left { gap: 0.6rem; }
+.header-left .progress-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: auto;
+  height: 3px;
+  border-radius: 0;
+  background: transparent;
+}
+.header-right .button { padding: 0.45rem 0.9rem; font-size: 0.9rem; }   /* plum: paper on ink, 13:1 */
+.header-right .flow-arrow { display: none; }
+.header-right .flow-text,
+.header-right .button:hover .flow-text,
+.header-right .button:focus-visible .flow-text { transform: none; }
+.lang-current { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@media (min-width: 30rem) {
+  .header-inner { gap: 1rem; }
+  .header-left { gap: 0.9rem; }
+  .header-left .progress-track {
+    position: relative;
+    width: 3.5rem;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--ink-line);
+  }
+  .header-right .button { padding: 0.45rem 1.75rem; font-size: var(--fs-button); }
+  .header-right .flow-arrow { display: block; }
+  .header-right .flow-text { transform: translateX(-0.75rem); }
+  .header-right .button:hover .flow-text,
+  .header-right .button:focus-visible .flow-text { transform: translateX(0.75rem); }
+  .lang-current { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+}
+
+/* Language switcher (i18n.js). Only shown with JS. */
+.lang { position: relative; display: none; }
+.js .lang { display: block; }
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.lang-btn .icon { width: 18px; height: 18px; }
+.lang-btn:hover,
+.lang-btn[aria-expanded="true"] { border-color: var(--ink-line-strong); }
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 30;
+  min-width: 11rem;
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+}
+.lang-menu[hidden] { display: none; }
+.lang-menu a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.75rem;
+  border-radius: 4px;
+  color: var(--ink);
+  text-decoration: none;
+  /* system fonts here, so opening the menu never downloads CJK web fonts */
+  font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Yu Gothic", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.lang-menu a:hover { background: var(--ink-line); }
+.lang-menu a[aria-current="true"] { font-weight: 700; text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 2px; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Japanese and Chinese: Noto Sans (self-hosted, loaded on demand by i18n.js),
+   no negative letter-spacing, a little more line height. */
+html:lang(ja) {
+  --serif: "Noto Sans JP Variable", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  --sans: "Noto Sans JP Variable", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+}
+html:lang(zh-Hans) {
+  --serif: "Noto Sans SC Variable", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --sans: "Noto Sans SC Variable", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+html:lang(ja) :is(h1, h2, h3, .h3, dt, .acc-btn, .footer-statement),
+html:lang(zh-Hans) :is(h1, h2, h3, .h3, dt, .acc-btn, .footer-statement) { letter-spacing: 0; font-weight: 700; }
+html:lang(ja) .hero-title,
+html:lang(zh-Hans) .hero-title { line-height: 1.3; }
+/* Japanese: break headings between phrases, not mid-word (Chrome/Edge; others fall back) */
+html:lang(ja) :is(h1, h2, h3, .h3, dt, .acc-btn, .footer-statement) { word-break: auto-phrase; overflow-wrap: anywhere; }
+html:lang(ja) body,
+html:lang(zh-Hans) body { line-height: 1.85; line-break: strict; }
+
+/* Confetti layer (script.js): fixed, above everything, never blocks clicks */
+.confetti { position: fixed; inset: 0; z-index: 60; overflow: hidden; pointer-events: none; }
+.confetti span { position: absolute; display: block; }
+
+.site-nav { display: none; }
+.site-nav ul { display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.site-nav a:hover { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 2px; }
+
+/* Flow buttons: a plain-CSS port of the FlowButton React component.
+   Pill outline at rest. On hover/focus a circle fills from the centre, the
+   right arrow slides out, a left arrow slides in and the corners tighten.
+   Colours are set per variant with the --btn-* properties (palette only).
+   Timings live in section 8 (Motion). */
+.button {
+  /* Default: solid red at rest, fills with plum on hover */
+  --btn-bg: var(--red);
+  --btn-line: var(--red);
+  --btn-text: var(--on-red);          /* white on red: 19px bold, AA large */
+  --btn-fill: var(--ink);
+  --btn-text-hover: var(--paper);
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: 48px;
+  padding: 0.7rem 2rem;
+  border: 1.5px solid var(--btn-line);
+  border-radius: 100px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font: inherit;
+  font-size: var(--fs-button);
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.button:hover,
+.button:focus-visible { border-color: transparent; border-radius: 12px; color: var(--btn-text-hover); }
+.button:active { transform: scale(0.95); }
+
+.flow-text { position: relative; z-index: 1; transform: translateX(-0.75rem); }
+.button:hover .flow-text,
+.button:focus-visible .flow-text { transform: translateX(0.75rem); }
+
+.flow-fill {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--btn-fill);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+.button:hover .flow-fill,
+.button:focus-visible .flow-fill { width: 150%; opacity: 1; }
+
+.flow-arrow {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  width: 1rem;
+  height: 1rem;
+  margin-top: -0.5rem;           /* stroke follows the button's text colour */
+}
+.flow-arrow-in { left: -25%; }
+.flow-arrow-out { right: 1rem; }
+.button:hover .flow-arrow-in,
+.button:focus-visible .flow-arrow-in { left: 1rem; }
+.button:hover .flow-arrow-out,
+.button:focus-visible .flow-arrow-out { right: -25%; }
+
+.button-small { min-height: 44px; padding: 0.45rem 1.75rem; white-space: nowrap; }
+
+/* Plum: header and "Book a call". Solid plum at rest, fills red on hover */
+.button-plum { --btn-bg: var(--ink); --btn-line: var(--ink); --btn-text: var(--paper); --btn-fill: var(--red); --btn-text-hover: var(--on-red); }
+
+/* On dark (--ink) backgrounds: solid red at rest, fills with paper on hover */
+.button-on-dark { --btn-bg: var(--red); --btn-line: var(--red); --btn-text: var(--on-red); --btn-fill: var(--paper); --btn-text-hover: var(--ink); }
+
+.round-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.round-btn:hover { background: var(--ink); color: var(--paper); }
+
+.label {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* ---------- 6. Sections ---------- */
+
+/* Hero: halftone print behind, text kept on a calm (ink-free) area.
+   The canvas is absolutely positioned, so it never shifts layout. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 2.25rem 0 9rem;        /* bottom band shows the print on phones */
+  isolation: isolate;
+}
+.halftone {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+.hero-content { max-width: 40rem; }
+.hero-title .line { display: block; }
+.hero-title .line-quiet { font-weight: 400; }
+.hero-title {
+  font-size: var(--fs-hero);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+.hero-sub {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin-bottom: 2rem;
+}
+
+/* Who: compact row between rules */
+.who { border-top: 1px solid var(--ink-line); border-bottom: 1px solid var(--ink-line); padding: 1.75rem 0; }
+.who-inner { display: grid; gap: 0.75rem; }
+.who .label { margin: 0.35rem 0 0; }
+.who p { margin-bottom: 0.75rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin: 0; }
+.tags li {
+  border: 1px solid var(--coral);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.95rem;
+}
+
+/* Services: split layout, accordion */
+.split { display: grid; gap: 2rem; }
+.split > * { min-width: 0; }   /* never let a long word or phrase widen the page */
+.split-side p { color: var(--ink-2); }
+
+.acc { border-top: 1px solid var(--ink); }
+.acc-item { border-bottom: 1px solid var(--ink-line); }
+.acc-item h3 { margin: 0; font-size: inherit; letter-spacing: 0; }
+.acc-btn {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 4rem;
+  padding: 0.9rem 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-align: left;
+  cursor: pointer;
+}
+.acc-title { text-decoration: underline transparent 2px; text-underline-offset: 0.2em; }
+.acc-btn:hover .acc-title { text-decoration-color: var(--red); }
+.acc-num { font-family: var(--sans); font-size: 0.8rem; font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
+.acc-icon { color: var(--ink); }
+.acc-item.is-open .acc-icon { color: var(--red); transform: rotate(180deg); }
+
+/* Height fold via grid rows (0fr → 1fr). Without JS every panel is open. */
+.acc-panel { display: grid; grid-template-rows: 1fr; }
+.js .acc-panel { grid-template-rows: 0fr; visibility: hidden; }
+.js .acc-item.is-open .acc-panel { grid-template-rows: 1fr; visibility: visible; }
+.acc-inner { overflow: hidden; padding-left: 2.75rem; }
+.acc-inner > :last-child { margin-bottom: 1.5rem; }
+.duration { font-size: var(--fs-small); color: var(--ink-2); margin-bottom: 0.75rem; }
+.steps,
+.items { padding-left: 1.2rem; }
+.steps li + li,
+.items li + li { margin-top: 0.6rem; }
+.steps li::marker,
+.items li::marker { color: var(--red); }
+.acc-note { margin-top: 1.5rem; color: var(--ink-2); }
+
+.dont {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border: 1px solid var(--lilac);
+  border-radius: var(--radius);
+}
+.dont h3 { margin-bottom: 0.75rem; }
+.dont ul { padding-left: 1.2rem; margin: 0; color: var(--ink-2); }
+.dont li::marker { color: var(--lilac); }
+.dont li + li { margin-top: 0.5rem; }
+
+/* How a project runs: carousel */
+.head-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+.head-row h2 { margin: 0; max-width: 18ch; }
+.carousel-nav { display: flex; gap: 0.5rem; flex: none; margin-left: auto; }
+
+.carousel {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 max(var(--gutter), calc((100vw - 76rem) / 2 + var(--gutter)));
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.carousel::-webkit-scrollbar { display: none; }
+.carousel.is-dragging { scroll-snap-type: none; user-select: none; }
+.track {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem var(--gutter) 0.5rem max(var(--gutter), calc((100vw - 76rem) / 2 + var(--gutter)));
+  width: max-content;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  width: min(80vw, 24rem);
+  padding: 1.75rem 1.5rem;
+  border: 1px solid var(--ink-line-strong);
+  border-top: 3px solid var(--red);
+  border-radius: var(--radius);
+}
+.card-num {
+  display: block;
+  margin-bottom: 2.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.card p { color: var(--ink-2); }
+.card-cta { margin-top: auto; padding-top: 1.75rem; text-align: center; }
+
+.drag-cursor { display: none; }
+
+/* Principles: definition rows */
+.rows { margin: 2rem 0 0; border-top: 1px solid var(--ink); }
+.row { padding: 1.25rem 0; border-bottom: 1px solid var(--ink-line); }
+.row dt { font-family: var(--serif); font-size: var(--fs-h3); font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 0.4rem; }
+.row dd { margin: 0; color: var(--ink-2); }
+
+
+/* Early clients + questions */
+.early-faq { display: grid; gap: 3rem; }
+.early {
+  align-self: start;
+  padding: 1.75rem 1.5rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--radius);
+}
+.early .h3 { color: var(--paper); font-size: 1.5rem; }
+.early p { color: var(--paper-soft); }
+.early .button { margin-top: 1.25rem; }
+.early :focus-visible { outline-color: var(--paper); }
+
+.faq h2 { margin-bottom: 1.5rem; }
+.faq details { border-bottom: 1px solid var(--ink-line); }
+.faq details:first-of-type { border-top: 1px solid var(--ink); }
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.5rem;
+  padding: 0.75rem 0;
+  list-style: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline transparent 2px;
+  text-underline-offset: 0.22em;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:hover { text-decoration-color: var(--red); }
+.faq details[open] summary .icon { color: var(--red); transform: rotate(180deg); }
+.faq details p { padding: 0 2rem 1.25rem 0; color: var(--ink-2); }
+
+/* Contact: the one section with its own background (ink) */
+.contact { background: var(--ink); color: var(--paper); }
+.contact h2 { color: var(--paper); max-width: 16ch; }
+.contact-sub { font-size: var(--fs-lead); line-height: 1.6; }
+.contact p { color: var(--paper); }
+.contact-inner { display: grid; gap: 2.5rem; }
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  color: var(--paper);
+  font-weight: 600;
+}
+.contact-email .icon { color: var(--red); }
+#contact-title:focus { outline: none; }   /* focused by script after a "Let's talk" jump */
+/* Long email address: allow it to wrap on very narrow phones instead of widening the page */
+.contact-inner > * { min-width: 0; }
+.contact-email,
+.footer-col a[href^="mailto:"] { overflow-wrap: anywhere; }
+.contact :focus-visible { outline-color: var(--paper); }
+
+.form { display: grid; gap: 1rem; }
+.field { display: grid; gap: 0.35rem; }
+.field label { font-weight: 600; font-size: 0.95rem; }
+.field input,
+.field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--paper-soft);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--paper);
+  font: inherit;
+}
+.field textarea { resize: vertical; height: 7.5rem; }   /* compact on phones so the whole form fits on screen */
+.field input:focus-visible,
+.field textarea:focus-visible { outline: 2px solid var(--paper); outline-offset: 0; border-color: var(--paper); }
+.form .button { justify-self: start; }
+.form-note { font-size: var(--fs-small); }
+.form-status { font-weight: 600; min-height: 1.5em; }
+.form-status.is-ok,
+.form-status.is-error { padding-left: 0.75rem; border-left: 3px solid var(--green); }
+.form-status.is-error { border-left-color: var(--red); }
+.form-status a { color: var(--paper); text-decoration-color: var(--red); overflow-wrap: anywhere; }
+.form .button[disabled] { cursor: progress; opacity: 0.7; }
+
+/* Footer: paper, ruled off from the dark contact section */
+.site-footer { padding: 3.5rem 0 2rem; }
+.footer-statement {
+  font-family: var(--serif);
+  font-size: var(--fs-h2);          /* 26px+ so red passes AA large */
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  color: var(--red);
+  max-width: 20ch;
+  margin-bottom: 2.5rem;
+}
+.footer-grid { display: grid; border-top: 1px solid var(--ink); }
+.footer-col { padding: 1.25rem 0; border-bottom: 1px solid var(--ink-line); }
+.footer-col ul { list-style: none; margin: 0; padding: 0; }
+.footer-col a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+}
+.footer-col a:hover { text-decoration: underline; text-decoration-color: var(--red); }
+.footer-col p { margin: 0 0 0.25rem; }
+.footer-brand { display: inline-flex; align-items: center; gap: 0.65rem; font-weight: 600; }
+.footer-brand .brand-mark { width: 2.5rem; height: 2.5rem; }
+.footer-legal { color: var(--ink-2); font-size: var(--fs-small); }
+
+/* ---------- Little creatures (decorative, aria-hidden) ----------
+   Caterpillar (Who I work with) → cocoon (How a project runs) → butterfly (contact).
+   Palette only. Animations are in section 8 and stop under reduced motion. */
+
+/* Caterpillar: crawls along the line above "Find new customers" */
+.who-side { display: grid; gap: 0.9rem; align-content: start; }
+.acc { position: relative; }
+.caterpillar-track {
+  position: absolute;
+  top: -12px;                 /* feet on the accordion's top rule */
+  left: 2.25rem;
+  z-index: 1;
+  width: 14rem;
+  height: 17px;
+  pointer-events: none;
+  --travel: calc(14rem - 48px);
+}
+.caterpillar { position: absolute; left: 0; bottom: 0; display: block; width: 48px; height: 17px; }
+.caterpillar svg { display: block; overflow: visible; }
+.caterpillar .seg { fill: var(--coral); }
+.caterpillar .seg-head { fill: var(--red); }
+.caterpillar .eye { fill: var(--ink); }
+.caterpillar .antenna { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-linecap: round; }
+
+/* Cocoon: hangs on a silk thread from the section's top rule */
+.cocoon {
+  --silk: 5rem;                         /* = .section-roomy top padding */
+  position: relative;
+  flex: none;
+  align-self: flex-start;
+  width: 18px;
+  height: 36px;
+  margin: 0 auto 0 0.5rem;              /* sits just right of the heading */
+  transform-origin: 50% calc(-1 * var(--silk));
+}
+.cocoon::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 2px);
+  width: 1px;
+  height: var(--silk);
+  background: var(--ink-line-strong);
+}
+.cocoon svg { display: block; transform-origin: 50% 0; }
+.cocoon-body { fill: var(--lilac); }
+.cocoon-lines { fill: none; stroke: var(--ink-line-strong); stroke-width: 1; stroke-linecap: round; }
+
+/* Butterfly: flutters in a loop under the email address */
+.butterfly-area { position: relative; height: 5rem; max-width: 18rem; margin-top: 0.25rem; }
+.butterfly { position: absolute; left: 0; top: 1.5rem; display: block; width: 34px; height: 27px; }
+.butterfly svg { display: block; overflow: visible; }
+.butterfly .wing { transform-box: fill-box; }
+.butterfly .wing-left { transform-origin: right center; }
+.butterfly .wing-right { transform-origin: left center; }
+.butterfly .wing-upper { fill: var(--red); }
+.butterfly .wing-lower { fill: var(--coral); }
+.butterfly-body { fill: none; stroke: var(--paper); stroke-width: 2; stroke-linecap: round; }
+.butterfly-antenna { fill: none; stroke: var(--paper); stroke-width: 1; stroke-linecap: round; }
+
+/* ---------- 7. Responsive ---------- */
+
+@media (min-width: 30rem) {
+  .brand-text { display: inline; }
+}
+
+@media (min-width: 48rem) {
+  :root { --gutter: 2rem; }
+
+  .section { padding: 5.5rem 0; }
+  .section-roomy { padding: 7.5rem 0; }
+  .cocoon { --silk: 7.5rem; }
+
+  .hero { padding: 5rem 0 5.5rem; }
+  .hero-content { max-width: 46rem; }
+
+  .header-left .progress-track { width: 5rem; }
+
+  .who-inner { grid-template-columns: 12rem 1fr; gap: 2rem; align-items: start; }
+
+  .split { grid-template-columns: 5fr 7fr; gap: 4rem; align-items: start; }
+  .split-side { position: sticky; top: calc(var(--header-h) + 2rem); }
+
+  .dont { display: grid; grid-template-columns: 12rem 1fr; gap: 2rem; padding: 2rem; }
+  .dont h3 { margin: 0; }
+
+  .track { gap: 1.5rem; }
+  .card { padding: 2rem; }
+
+  .row { display: grid; grid-template-columns: 2fr 3fr; gap: 3rem; padding: 1.5rem 0; }
+  .row dt { margin: 0; }
+
+  .early-faq { grid-template-columns: 2fr 3fr; gap: 5rem; }
+  .early { position: sticky; top: calc(var(--header-h) + 2rem); padding: 2.25rem; }
+
+  .contact-inner { grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .form { gap: 1.25rem; }
+  .field textarea { height: auto; }
+
+  .footer-grid { grid-template-columns: repeat(4, 1fr); }
+  .footer-col { padding: 1.5rem 1.5rem 1.5rem 0; border-bottom: 0; }
+  .footer-col + .footer-col { border-left: 1px solid var(--ink-line); padding-left: 1.5rem; }
+}
+
+@media (min-width: 64rem) {
+  .site-nav { display: block; }
+}
+
+/* Custom "Drag" cursor over the carousel, real mouse only */
+@media (hover: hover) and (pointer: fine) {
+  .js .carousel { cursor: none; }
+  .drag-cursor {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 50;
+    width: 3.75rem;
+    height: 3.75rem;
+    margin: -1.875rem 0 0 -1.875rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 700;
+    font-size: 0.85rem;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate3d(var(--x, -200px), var(--y, -200px), 0);
+  }
+  .drag-cursor.is-active { opacity: 1; }
+  .drag-cursor.is-active.is-hidden { opacity: 0; }
+  .js .carousel a,
+  .js .carousel button { cursor: pointer; }
+}
+
+/* ---------- 8. Motion ----------
+   No entrance or scroll-reveal animations; content is always visible.
+   The halftone drifts slowly (halftone.js) and is static under reduced motion. */
+
+:root {
+  --dur-hover: 0.15s;
+  --dur-fold: 0.35s;
+  --ease: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --ease-flow: cubic-bezier(0.23, 1, 0.32, 1);     /* button shape + colour */
+  --ease-fill: cubic-bezier(0.19, 1, 0.22, 1);     /* circle fill */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* arrows, slight overshoot */
+}
+
+a,
+.round-btn,
+.acc-title,
+.faq summary,
+.field input,
+.field textarea {
+  transition: color var(--dur-hover) ease, background-color var(--dur-hover) ease,
+              border-color var(--dur-hover) ease, text-decoration-color var(--dur-hover) ease;
+}
+/* Flow buttons (timings from the FlowButton component) */
+.button {
+  transition: border-color 0.6s var(--ease-flow), border-radius 0.6s var(--ease-flow),
+              color 0.6s var(--ease-flow), transform 0.6s var(--ease-flow);
+}
+.flow-text { transition: transform 0.8s ease-out; }
+.flow-fill { transition: width 0.8s var(--ease-fill), opacity 0.8s var(--ease-fill); }
+.flow-arrow { transition: left 0.8s var(--ease-spring), right 0.8s var(--ease-spring); }
+
+.acc-panel { transition: grid-template-rows var(--dur-fold) var(--ease), visibility 0s linear var(--dur-fold); }
+.acc-item.is-open .acc-panel { transition: grid-template-rows var(--dur-fold) var(--ease), visibility 0s; }
+.acc-icon,
+.faq summary .icon { transition: transform 0.2s ease, color 0.2s ease; }
+.drag-cursor { transition: opacity var(--dur-hover) linear; }
+
+/* Little creatures */
+.caterpillar { animation: crawl 16s linear infinite; }
+.caterpillar .seg { animation: inch 0.7s ease-in-out infinite; }
+.caterpillar .seg-1 { animation-delay: 0s; }
+.caterpillar .seg-2 { animation-delay: 0.08s; }
+.caterpillar .seg-3 { animation-delay: 0.16s; }
+.caterpillar .seg-4 { animation-delay: 0.24s; }
+.caterpillar .seg-5 { animation-delay: 0.32s; }
+.caterpillar .seg-head { animation-delay: 0.4s; }
+@keyframes crawl {                      /* there and back, turning round at each end */
+  0%   { transform: translateX(0) scaleX(1); }
+  46%  { transform: translateX(var(--travel)) scaleX(1); }
+  50%  { transform: translateX(var(--travel)) scaleX(-1); }
+  96%  { transform: translateX(0) scaleX(-1); }
+  100% { transform: translateX(0) scaleX(1); }
+}
+@keyframes inch {                       /* a ripple running through the body */
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-2.5px); }
+}
+
+.cocoon { animation: sway 5s ease-in-out infinite; }
+.cocoon svg { animation: twitch 7s ease-in-out infinite; }
+@keyframes sway {
+  0%, 100% { transform: rotate(-2.5deg); }
+  50%      { transform: rotate(2.5deg); }
+}
+@keyframes twitch {                     /* something's happening in there */
+  0%, 86%, 100% { transform: rotate(0); }
+  89% { transform: rotate(7deg); }
+  92% { transform: rotate(-6deg); }
+  95% { transform: rotate(3deg); }
+}
+
+.butterfly { animation: flutter-path 12s ease-in-out infinite; }
+.butterfly .wing { animation: flap 0.3s ease-in-out infinite alternate; }
+@keyframes flap {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0.25); }
+}
+@keyframes flutter-path {
+  0%   { transform: translate(0, 0) rotate(-6deg); }
+  20%  { transform: translate(70px, -18px) rotate(8deg); }
+  40%  { transform: translate(150px, 6px) rotate(10deg); }
+  55%  { transform: translate(200px, -10px) rotate(-4deg); }
+  70%  { transform: translate(130px, 22px) rotate(-12deg); }
+  85%  { transform: translate(50px, 12px) rotate(-8deg); }
+  100% { transform: translate(0, 0) rotate(-6deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

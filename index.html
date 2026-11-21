@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morgan Automation · Small AI automations for food and trade businesses</title>
+  <meta name="description"
+    content="Small automations that use AI to find customers and save hours, built for small food and trade businesses in Europe. Fixed prices, code you own, and a person checks everything that goes out.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Morgan Automation">
+  <meta property="og:description"
+    content="Small automations that use AI to find customers and save hours, built for small food and trade businesses in Europe.">
+  <meta property="og:image" content="assets/brand/icon.png">
+  <!-- TODO: make og:image an absolute URL and add og:url once the domain is live. -->
+  <meta name="theme-color" content="#efe7da">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='120 120 560 560'%3E%3Crect x='120' y='120' width='560' height='560' rx='140' fill='%232a1f29'/%3E%3Cpath d='M268 513V305l132 132 130-130v206' fill='none' stroke='%23efe7da' stroke-width='44' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='531' cy='303' r='39' fill='%23f03737'/%3E%3C/svg%3E">
+  <!-- TODO: icon.png (used for og:image and apple-touch-icon) is still in the old navy/blue logo colours. Re-export it in the new palette. -->
+  <link rel="apple-touch-icon" href="assets/brand/icon.png">
+  <link rel="preload" href="assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <!-- "js" turns on the accordion and carousel controls. If script.js hasn't run
+       within 3s, it is removed so every panel shows. Content never depends on JS. -->
+  <script>
+    (function (c) {
+      c.add('js');
+      setTimeout(function () { if (!window.__maReady) c.remove('js'); }, 3000);
+    })(document.documentElement.classList);
+  </script>
+  <script src="script.js" defer></script>
+  <script src="halftone.js" defer></script>
+  <script src="i18n.js" defer></script>
+</head>
+
+<body>
+  <!-- Icons: Lucide (ISC licence), 20px, stroke 2. Defined once, used with <use>. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow-right" viewBox="0 0 24 24">
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24">
+      <path d="m12 19-7-7 7-7" />
+      <path d="M19 12H5" />
+    </symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24">
+      <path d="m6 9 6 6 6-6" />
+    </symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+      <path d="M2 12h20" />
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="header-left">
+        <a class="brand" href="#top" aria-label="Morgan Automation, back to top">
+          <svg class="brand-mark" viewBox="120 120 560 560" aria-hidden="true" focusable="false">
+            <rect x="120" y="120" width="560" height="560" rx="140" class="mark-bg" />
+            <path d="M268 513V305l132 132 130-130v206" class="mark-m" />
+            <circle cx="531" cy="303" r="39" class="mark-dot" />
+          </svg>
+          <span class="brand-text">Morgan Automation</span>
+        </a>
+        <!-- Scroll progress: 0% at the top, 100% when the contact section arrives (script.js §5).
+           Decorative, so hidden from screen readers; hidden without JS. -->
+        <div class="progress" data-progress aria-hidden="true">
+          <span class="progress-track"><span class="progress-fill"></span></span>
+          <span class="progress-num">0%</span>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#services">What I automate</a></li>
+          <li><a href="#how-it-works">How a project runs</a></li>
+          <li><a href="#faq">Questions</a></li>
+        </ul>
+      </nav>
+      <div class="header-right">
+        <!-- Language switcher (i18n.js). Hidden without JS. -->
+        <div class="lang" data-lang>
+          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu">
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-globe" />
+            </svg>
+            <span class="lang-current">EN</span>
+            <span class="visually-hidden">Language / Taal / Sprache / Langue / 言語 / 语言</span>
+          </button>
+          <ul class="lang-menu" id="lang-menu" hidden>
+            <li><a href="?lang=en" hreflang="en" lang="en" data-lang-option="en">English</a></li>
+            <li><a href="?lang=nl" hreflang="nl" lang="nl" data-lang-option="nl">Nederlands</a></li>
+            <li><a href="?lang=de" hreflang="de" lang="de" data-lang-option="de">Deutsch</a></li>
+            <li><a href="?lang=fr" hreflang="fr" lang="fr" data-lang-option="fr">Français</a></li>
+            <li><a href="?lang=ja" hreflang="ja" lang="ja" data-lang-option="ja">日本語</a></li>
+            <li><a href="?lang=zh" hreflang="zh-Hans" lang="zh-Hans" data-lang-option="zh">中文（简体）</a></li>
+          </ul>
+        </div>
+        <a class="button button-small button-plum" href="#contact"><svg class="icon flow-arrow flow-arrow-in"
+            aria-hidden="true">
+            <use href="#i-arrow-right" />
+          </svg><span class="flow-text">Let's talk</span><span class="flow-fill" aria-hidden="true"></span><svg
+            class="icon flow-arrow flow-arrow-out" aria-hidden="true">
+            <use href="#i-arrow-right" />
+          </svg></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Hero: what, for whom, one action. Sized to content.
+         The halftone canvas sits behind, absolutely positioned (no layout shift),
+         and prints almost no ink behind #hero-content so the text stays readable. -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <canvas class="halftone" data-halftone data-preset="riso" data-calm="#hero-content" aria-hidden="true"></canvas>
+      <div class="container">
+        <div class="hero-content" id="hero-content">
+          <h1 id="hero-title" class="hero-title">
+            <span class="line">Automation shouldn't need an IT department.</span>
+            <span class="line line-quiet">I set it up, check it, and hand it over.</span>
+          </h1>
+          <p class="hero-sub">Small automations that use AI to find customers and save hours, built for small food and
+            trade businesses in Europe.</p>
+          <a class="button" href="#contact"><svg class="icon flow-arrow flow-arrow-in" aria-hidden="true">
+              <use href="#i-arrow-right" />
+            </svg><span class="flow-text">Let's talk</span><span class="flow-fill" aria-hidden="true"></span><svg
+              class="icon flow-arrow flow-arrow-out" aria-hidden="true">
+              <use href="#i-arrow-right" />
+            </svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who: one line, inline list -->
+    <section class="who" aria-labelledby="who-title">
+      <div class="container who-inner">
+        <div class="who-side">
+          <h2 id="who-title" class="label">Who I work with</h2>
+        </div>
+        <div>
+          <p>Small teams who make, move or sell things:</p>
+          <ul class="tags">
+            <li>Food producers</li>
+            <li>Wholesalers and importers</li>
+            <li>Trade businesses</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services: heading left / accordion right -->
+    <section class="section rule-top" id="services" aria-labelledby="services-title">
+      <div class="container split">
+        <div class="split-side">
+          <h2 id="services-title">What I can automate for you</h2>
+          <p>Every business works differently, so think of this as a menu of ideas. Your best first
+            project might be on it, or it might be something we only spot once we <a class="inline-link"
+              href="#contact">call and talk</a>.</p>
+          <p>Each project has one clear job and a fixed price agreed before I start. Most use AI to read, sort or draft,
+            and a person checks the result.</p>
+        </div>
+
+        <div class="acc" data-accordion>
+          <!-- Decorative: a small caterpillar crawling along the line above "Find new customers" -->
+          <div class="caterpillar-track" aria-hidden="true">
+            <span class="caterpillar">
+              <svg viewBox="0 0 64 22" width="48" height="17" focusable="false">
+                <circle class="seg seg-1" cx="7" cy="14" r="5" />
+                <circle class="seg seg-2" cx="16" cy="14" r="5" />
+                <circle class="seg seg-3" cx="25" cy="14" r="5" />
+                <circle class="seg seg-4" cx="34" cy="14" r="5" />
+                <circle class="seg seg-5" cx="43" cy="14" r="5" />
+                <g class="seg seg-head">
+                  <circle cx="53" cy="12" r="6" />
+                  <circle class="eye" cx="55.5" cy="10.5" r="1.1" />
+                  <path class="antenna" d="M51 7 L49 2 M55 7 L57.5 2.5" />
+                </g>
+              </svg>
+            </span>
+          </div>
+          <div class="acc-item is-open">
+            <h3><button class="acc-btn" id="acc-btn-1" aria-expanded="true" aria-controls="acc-panel-1"><span
+                  class="acc-num">01</span><span class="acc-title">Find new customers</span><svg class="icon acc-icon"
+                  aria-hidden="true">
+                  <use href="#i-chevron-down" />
+                </svg></button></h3>
+            <div class="acc-panel" id="acc-panel-1" role="region" aria-labelledby="acc-btn-1">
+              <div class="acc-inner">
+                <p class="duration">Typically 1–2 weeks</p>
+                <p>From "who should we sell to?" to a list you can start calling on Monday:</p>
+                <ol class="steps">
+                  <li><strong>Find.</strong> Businesses that match your ideal buyer, such as restaurants, shops or
+                    wholesalers in a city or region.</li>
+                  <li><strong>Check.</strong> The right contact person, email, phone and website, cleaned, with
+                    duplicates removed.</li>
+                  <li><strong>Rank.</strong> Every lead scored by fit, so you start with the best ones.</li>
+                  <li><strong>Reach out.</strong> A short, personal first message for each lead, drafted with AI in
+                    English, Japanese or another language, for you to review and send.</li>
+                  <li><strong>Follow up.</strong> A simple tracker showing who replied and who needs a nudge this week.
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <h3><button class="acc-btn" id="acc-btn-2" aria-expanded="false" aria-controls="acc-panel-2"><span
+                  class="acc-num">02</span><span class="acc-title">Sales and orders</span><svg class="icon acc-icon"
+                  aria-hidden="true">
+                  <use href="#i-chevron-down" />
+                </svg></button></h3>
+            <div class="acc-panel" id="acc-panel-2" role="region" aria-labelledby="acc-btn-2">
+              <div class="acc-inner">
+                <p class="duration">Typically a few days to 3 weeks</p>
+                <ul class="items">
+                  <li><strong>Order intake from email.</strong> Orders that arrive by email, PDF or WhatsApp export are
+                    read with AI, checked and put into your order sheet, ready for you to confirm.</li>
+                  <li><strong>Quote and offer builder.</strong> Fill in the customer and products and get a clean,
+                    branded quote in minutes.</li>
+                  <li><strong>Price lists and catalogues.</strong> Update one source file and get up-to-date PDFs or
+                    spreadsheets for each customer group or language.</li>
+                  <li><strong>Product spec sheets.</strong> Consistent spec sheets made from the product data you
+                    already have.</li>
+                  <li><strong>Reorder reminders.</strong> Customers get a nudge around the time they usually reorder,
+                    and you get a list of who's overdue.</li>
+                  <li><strong>New customer welcome pack.</strong> When someone signs up, they get your catalogue, terms
+                    and ordering instructions without you having to send them by hand.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <h3><button class="acc-btn" id="acc-btn-3" aria-expanded="false" aria-controls="acc-panel-3"><span
+                  class="acc-num">03</span><span class="acc-title">Back office</span><svg class="icon acc-icon"
+                  aria-hidden="true">
+                  <use href="#i-chevron-down" />
+                </svg></button></h3>
+            <div class="acc-panel" id="acc-panel-3" role="region" aria-labelledby="acc-btn-3">
+              <div class="acc-inner">
+                <p class="duration">Typically 1–3 weeks</p>
+                <ul class="items">
+                  <li><strong>Supplier invoices and documents.</strong> Invoices, delivery notes and certificates are
+                    read with AI and their key details go into a spreadsheet, ready for your bookkeeper.</li>
+                  <li><strong>Weekly sales summary.</strong> One short report every Monday: what sold, who ordered, what
+                    changed and who's gone quiet.</li>
+                  <li><strong>Stock and price alerts.</strong> You get a message when stock runs low or a supplier's
+                    price changes.</li>
+                  <li><strong>Inbox sorting.</strong> Incoming emails are sorted by AI into orders, questions,
+                    complaints and spam, and common questions get a draft reply for you to approve.</li>
+                  <li><strong>Data clean-up.</strong> Messy customer or product lists are merged, de-duplicated and put
+                    into one tidy file.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <h3><button class="acc-btn" id="acc-btn-4" aria-expanded="false" aria-controls="acc-panel-4"><span
+                  class="acc-num">04</span><span class="acc-title">Content and marketing</span><svg
+                  class="icon acc-icon" aria-hidden="true">
+                  <use href="#i-chevron-down" />
+                </svg></button></h3>
+            <div class="acc-panel" id="acc-panel-4" role="region" aria-labelledby="acc-btn-4">
+              <div class="acc-inner">
+                <p class="duration">Typically 1–2 weeks each</p>
+                <ul class="items">
+                  <li><strong>Weekly trend scan.</strong> What's moving in your market, including competitors, new
+                    products and seasonal demand, in five minutes of reading.</li>
+                  <li><strong>Product descriptions and translations.</strong> Consistent descriptions for your shop or
+                    catalogue, drafted with AI in several languages and checked before they go live.</li>
+                  <li><strong>Caption drafts.</strong> Social posts drafted with AI from your products and photos, for
+                    you to edit and approve.</li>
+                  <li><strong>Seasonal content calendar.</strong> A plan for the year built around the holidays, seasons
+                    and events that matter to your customers.</li>
+                  <li><strong>Review monitoring.</strong> New Google reviews are collected in one place, with a polite
+                    draft reply for each.</li>
+                  <li><strong>Performance report.</strong> What worked last month, in plain language.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <h3><button class="acc-btn" id="acc-btn-5" aria-expanded="false" aria-controls="acc-panel-5"><span
+                  class="acc-num">05</span><span class="acc-title">Websites and landing pages</span><svg
+                  class="icon acc-icon" aria-hidden="true">
+                  <use href="#i-chevron-down" />
+                </svg></button></h3>
+            <div class="acc-panel" id="acc-panel-5" role="region" aria-labelledby="acc-btn-5">
+              <div class="acc-inner">
+                <p class="duration">Typically 1–2 weeks</p>
+                <ul class="items">
+                  <li><strong>Landing pages and product sites.</strong> Front-end sites for B2B and B2C businesses: a
+                    page for a product, campaign or trade fair, or a showcase site that stays in sync with your product
+                    list.</li>
+                  <li><strong>Enquiry and booking forms.</strong> Price list requests, sample orders, tastings or
+                    workshops, landing straight in your inbox or spreadsheet.</li>
+                </ul>
+                <p>Already selling on Shopify or another platform? I'll build pages and automations around your shop,
+                  but not the shop itself.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <h3><button class="acc-btn" id="acc-btn-6" aria-expanded="false" aria-controls="acc-panel-6"><span
+                  class="acc-num">06</span><span class="acc-title">Team workshop</span><svg class="icon acc-icon"
+                  aria-hidden="true">
+                  <use href="#i-chevron-down" />
+                </svg></button></h3>
+            <div class="acc-panel" id="acc-panel-6" role="region" aria-labelledby="acc-btn-6">
+              <div class="acc-inner">
+                <p class="duration">Half a day</p>
+                <p><strong>AI for your team.</strong> A hands-on session where your team learns to use AI tools for the
+                  work they actually do, such as emails, translations, price checks and reports. Everyone leaves with
+                  something that works.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="acc-note">Not sure which one you need? That's what the <a class="inline-link" href="#contact">free
+              call</a> is for.</p>
+        </div>
+      </div>
+
+      <!-- What I don't do: bordered two-column list, tighter spacing (related to services) -->
+      <div class="container">
+        <div class="dont">
+          <h3>What I don't do</h3>
+          <ul>
+            <li>Large company-wide systems or six-month projects</li>
+            <li>Sending mass cold emails or messages on your behalf</li>
+            <li>Anything that replaces your human judgement with customers. AI drafts but a person decides.</li>
+            <li><strong>Online shops, checkouts and payment systems.</strong> Taking payments safely means handling card
+              data, fraud checks, VAT, refunds and constant security updates. Mainstream platforms do this well for
+              cheaper then what i can build it for.
+              If you need to sell online, I'll point you to the right platform and build the landing
+              pages and automations around it.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- How a project runs: full-bleed draggable carousel, extra room -->
+    <section class="section section-roomy rule-top" id="how-it-works" aria-labelledby="how-title">
+      <div class="container">
+        <div class="head-row">
+          <h2 id="how-title">How a project runs, start to finish</h2>
+          <!-- Decorative: a cocoon hanging from a silk thread tied to the section's top rule -->
+          <span class="cocoon" aria-hidden="true">
+            <svg viewBox="0 0 20 40" width="18" height="36" focusable="false">
+              <path class="cocoon-body" d="M10 2 C17 6 18 20 15 30 C13 36 7 36 5 30 C2 20 3 6 10 2 Z" />
+              <path class="cocoon-lines" d="M5 12 Q10 15 15 12 M4 19 Q10 22 16 19 M5 26 Q10 29 15 26" />
+            </svg>
+          </span>
+          <div class="carousel-nav">
+            <button class="round-btn" type="button" data-carousel-prev aria-label="Previous step"><svg class="icon"
+                aria-hidden="true">
+                <use href="#i-arrow-left" />
+              </svg></button>
+            <button class="round-btn" type="button" data-carousel-next aria-label="Next step"><svg class="icon"
+                aria-hidden="true">
+                <use href="#i-arrow-right" />
+              </svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="carousel" data-carousel tabindex="0" role="region"
+        aria-label="How a project runs, four steps. Scroll sideways or use the arrow buttons.">
+        <ol class="track">
+          <li class="card">
+            <span class="card-num">Step 1</span>
+            <h3>Free 30-minute call.</h3>
+            <p>You tell me where the time goes. I tell you honestly whether automation will help, and if it won't, I'll
+              say so.</p>
+            <div class="card-cta">
+              <a class="button button-plum" href="#contact"><svg class="icon flow-arrow flow-arrow-in"
+                  aria-hidden="true">
+                  <use href="#i-arrow-right" />
+                </svg><span class="flow-text">Let's talk</span><span class="flow-fill" aria-hidden="true"></span><svg
+                  class="icon flow-arrow flow-arrow-out" aria-hidden="true">
+                  <use href="#i-arrow-right" />
+                </svg></a>
+            </div>
+          </li>
+          <li class="card">
+            <span class="card-num">Step 2</span>
+            <h3>Fixed-price proposal.</h3>
+            <p>Within a few days you get a short proposal: what I'll build, what it costs and when it'll be ready. You
+              pay for the result, not by the hour.</p>
+          </li>
+          <li class="card">
+            <span class="card-num">Step 3</span>
+            <h3>Build and check.</h3>
+            <p>I build it, using AI where it saves time, test it on your real data and send you short updates as I go.
+              Nothing goes live until you've seen it work.</p>
+          </li>
+          <li class="card">
+            <span class="card-num">Step 4</span>
+            <h3>Handover.</h3>
+            <p>You get the working automation, the code and a plain-language guide. Everything I build for you is your
+              property: the code, the accounts and the data, with no licence fees and no lock-in. If you want, I can
+              keep an eye on it afterwards for a small monthly fee. You don't have to.</p>
+          </li>
+        </ol>
+      </div>
+      <div class="drag-cursor" aria-hidden="true">Drag</div>
+    </section>
+
+    <!-- Principles: definition-style rows (term left, text right) -->
+    <section class="section rule-top" id="principles" aria-labelledby="principles-title">
+      <div class="container">
+        <h2 id="principles-title">My guarantees</h2>
+        <dl class="rows">
+          <div class="row">
+            <dt>Fixed prices.</dt>
+            <dd>You know the cost before anything starts, with no hourly billing and no surprise invoices.</dd>
+          </div>
+          <div class="row">
+            <dt>A person checks everything that goes out.</dt>
+            <dd>AI drafts and I review. Nothing is sent to your customers without a human check, and you decide what
+              runs automatically and what waits for your approval.</dd>
+          </div>
+          <div class="row">
+            <dt>Code you own.</dt>
+            <dd>Everything I build is yours: the code, the accounts and the data. You're never locked in to me or to a
+              platform.</dd>
+          </div>
+          <div class="row">
+            <dt>Small on purpose.</dt>
+            <dd>I build one useful thing at a time, so you can see whether it works before spending more. I don't do
+              six-month "digital transformation" projects.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+
+    <!-- Early clients (dark box) + questions (accordion), two columns -->
+    <section class="section rule-top" id="faq" aria-labelledby="faq-title">
+      <div class="container early-faq">
+        <aside class="early" aria-labelledby="early-title">
+          <h2 id="early-title" class="h3">Become an early client</h2>
+          <p>Early clients get a discount in
+            exchange for honest feedback and, if you're happy, a short testimonial.</p>
+          <!-- TODO: name the early-client discount once decided. -->
+          <a class="button button-on-dark" href="#contact"><svg class="icon flow-arrow flow-arrow-in"
+              aria-hidden="true">
+              <use href="#i-arrow-right" />
+            </svg><span class="flow-text">Let's talk</span><span class="flow-fill" aria-hidden="true"></span><svg
+              class="icon flow-arrow flow-arrow-out" aria-hidden="true">
+              <use href="#i-arrow-right" />
+            </svg></a>
+        </aside>
+
+        <div class="faq">
+          <h2 id="faq-title">Questions people ask before the first call</h2>
+          <details>
+            <summary>Do I need to be technical?<svg class="icon" aria-hidden="true">
+                <use href="#i-chevron-down" />
+              </svg></summary>
+            <p>No. If you can use email and a spreadsheet, you can use what I build. You also get a plain-language
+              guide.</p>
+          </details>
+          <details>
+            <summary>What tools do you use?<svg class="icon" aria-hidden="true">
+                <use href="#i-chevron-down" />
+              </svg></summary>
+            <p>Whatever fits what you already have, such as Google Sheets, Excel, email or your existing shop system,
+              plus AI models for reading, sorting and drafting. I don't make you switch.</p>
+          </details>
+          <details>
+            <summary>Is my data safe?<svg class="icon" aria-hidden="true">
+                <use href="#i-chevron-down" />
+              </svg></summary>
+            <p>Your data stays in your accounts wherever possible. I only access what the project needs, AI tools only
+              see the parts a task needs, and I hand back access at the end.</p>
+          </details>
+          <details>
+            <summary>What if it breaks?<svg class="icon" aria-hidden="true">
+                <use href="#i-chevron-down" />
+              </svg></summary>
+            <!-- TODO: confirm the fix period ("30 days" is still a draft value in content.md). -->
+            <p>Every project includes 30 days of fixes after handover. After that, you can pick the optional monthly
+              care or call me when you need me.</p>
+          </details>
+          <details>
+            <summary>Will AI send things to my customers without me knowing?<svg class="icon" aria-hidden="true">
+                <use href="#i-chevron-down" />
+              </svg></summary>
+            <p>No. Anything customer-facing goes through a human check first, by me during the build and by you once
+              it's running, unless you choose otherwise.</p>
+          </details>
+          <details>
+            <summary>Do you only work in the Netherlands?<svg class="icon" aria-hidden="true">
+                <use href="#i-chevron-down" />
+              </svg></summary>
+            <p>No. I work remotely with small businesses across Europe.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact: the one section with its own background (accent), extra room -->
+    <section class="section section-roomy contact" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-inner">
+        <div>
+          <h2 id="contact-title">Tell me what's eating your week.</h2>
+          <p class="contact-sub">Send me a short note and I'll reply to set up a free 30-minute call.</p>
+          <p>If automation won't help, I'll tell you.</p>
+          <p data-i18n-skip><a class="contact-email" href="mailto:perseus@morganautomations.com"><svg class="icon"
+                aria-hidden="true">
+                <use href="#i-mail" />
+              </svg>perseus@morganautomations.com</a></p>
+          <!-- Decorative: a small butterfly fluttering under the email -->
+          <div class="butterfly-area" aria-hidden="true">
+            <span class="butterfly">
+              <svg viewBox="0 0 40 32" width="34" height="27" focusable="false">
+                <g class="wing wing-left">
+                  <path class="wing-upper" d="M19 15 C14 3 4 1 2 7 C0 13 9 17 19 16 Z" />
+                  <path class="wing-lower" d="M19 17 C11 18 6 25 9 28 C12 31 17 25 19 18 Z" />
+                </g>
+                <g class="wing wing-right">
+                  <path class="wing-upper" d="M21 15 C26 3 36 1 38 7 C40 13 31 17 21 16 Z" />
+                  <path class="wing-lower" d="M21 17 C29 18 34 25 31 28 C28 31 23 25 21 18 Z" />
+                </g>
+                <path class="butterfly-body" d="M20 10 L20 24" />
+                <path class="butterfly-antenna" d="M20 11 Q18 6 16 4 M20 11 Q22 6 24 4" />
+              </svg>
+            </span>
+          </div>
+          <!-- TODO: if you get a booking page (e.g. a calendar link), it can replace the email link as the secondary action. -->
+        </div>
+
+        <!-- Sent through Web3Forms (https://web3forms.com), which emails it to perseus@morganautomations.com.
+             script.js submits it with fetch so the visitor stays on the page and sees a thank-you or an error.
+             Without JS the form posts normally and Web3Forms shows its own confirmation page.
+             The access key is public by design (Web3Forms keys are meant to sit in the page's HTML);
+             it only lets this form send to the inbox it was registered with. -->
+        <form class="form" action="https://api.web3forms.com/submit" method="POST" data-contact-form>
+          <input type="hidden" name="access_key" value="03a104e0-cf3a-4163-816f-330ead7260d0">
+          <input type="hidden" name="subject" value="New enquiry from morganautomations.com">
+          <!-- Spam trap (Web3Forms "botcheck"): hidden from people and screen readers; submissions that tick it are dropped. -->
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display: none;">
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-business">Business</label>
+            <input id="f-business" name="company" type="text" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="f-message">What would you like to automate?</label>
+            <textarea id="f-message" name="message" rows="5" required></textarea>
+          </div>
+          <button class="button button-on-dark" type="submit"><svg class="icon flow-arrow flow-arrow-in"
+              aria-hidden="true">
+              <use href="#i-arrow-right" />
+            </svg><span class="flow-text">Send my note</span><span class="flow-fill" aria-hidden="true"></span><svg
+              class="icon flow-arrow flow-arrow-out" aria-hidden="true">
+              <use href="#i-arrow-right" />
+            </svg></button>
+          <p class="form-note">Your message goes straight to my inbox through the form service Web3Forms.</p>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-statement">Small AI automations, checked by a person.</p>
+
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a class="footer-brand" href="#top">
+            <svg class="brand-mark" viewBox="120 120 560 560" aria-hidden="true" focusable="false">
+              <rect x="120" y="120" width="560" height="560" rx="140" class="mark-bg" />
+              <path d="M268 513V305l132 132 130-130v206" class="mark-m" />
+              <circle cx="531" cy="303" r="39" class="mark-dot" />
+            </svg>
+            Morgan Automation
+          </a>
+        </div>
+        <nav class="footer-col" aria-label="Footer">
+          <ul>
+            <li><a href="#services">What I automate</a></li>
+            <li><a href="#how-it-works">How a project runs</a></li>
+            <li><a href="#principles">Fixed price, checked by a person</a></li>
+            <li><a href="#faq">Questions</a></li>
+          </ul>
+        </nav>
+        <div class="footer-col">
+          <p data-i18n-skip><a href="mailto:perseus@morganautomations.com">perseus@morganautomations.com</a></p>
+          <p>Morgan Automation · The Hague, Netherlands</p>
+        </div>
+        <div class="footer-col footer-legal">
+          <!-- TODO: add KvK number and a privacy policy link (both still placeholders in content.md). -->
+          <p data-i18n-skip>© 2026 Morgan Automation</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
