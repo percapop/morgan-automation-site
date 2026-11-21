@@ -122,5 +122,6 @@ maI18n.register('nl', {
   "Your message goes straight to my inbox through the form service Web3Forms.": "Je bericht gaat via de formulierdienst Web3Forms rechtstreeks naar mijn inbox.",
   "Sending...": "Bezig met verzenden...",
   "Thanks, I'll reply within one working day": "Bedankt, ik reageer binnen één werkdag",
-  "Sorry, your note couldn't be sent. Please email me at {email}.": "Sorry, je bericht kon niet worden verzonden. Mail me dan direct op {email}."
+  "Sorry, your note couldn't be sent. Please email me at {email}.": "Sorry, je bericht kon niet worden verzonden. Mail me dan direct op {email}.",
+  "Privacy": "Privacy"
 });

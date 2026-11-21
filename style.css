@@ -790,6 +790,35 @@ html:lang(zh-Hans) body { line-height: 1.85; line-break: strict; }
 .butterfly-body { fill: none; stroke: var(--paper); stroke-width: 2; stroke-linecap: round; }
 .butterfly-antenna { fill: none; stroke: var(--paper); stroke-width: 1; stroke-linecap: round; }
 
+/* ---------- Privacy page (privacy.html) ---------- */
+.legal { padding: 3rem 0 4rem; }
+.legal h1 {
+  font-size: clamp(2.25rem, 1.6rem + 2.5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.legal h2 { font-size: 1.35rem; line-height: 1.25; letter-spacing: -0.01em; margin: 2.5rem 0 0.75rem; }
+.legal p { color: var(--ink-2); }
+.legal .updated { font-size: var(--fs-small); margin-bottom: 2rem; }
+.legal .summary { padding: 1.25rem 1.5rem; border: 1px solid var(--lilac); border-radius: var(--radius); }
+.legal .summary p { color: var(--ink); }
+.legal code { font-size: 0.9em; }
+.legal a:not(.button) { overflow-wrap: anywhere; }
+.legal-back { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--ink-line); }
+@media (min-width: 48rem) {
+  .legal { padding: 5rem 0 6rem; }
+}
+
+/* "Back" button: plain (no flow animation); arrow nudges left on hover */
+.button-back { gap: 0.5rem; padding-left: 1.25rem; padding-right: 1.4rem; }
+.button-back .icon { width: 1.1rem; height: 1.1rem; }
+.button-back:hover,
+.button-back:focus-visible { background: var(--red); color: var(--on-red); }
+.button-back .icon { transition: transform 0.15s ease; }
+.button-back:hover .icon,
+.button-back:focus-visible .icon { transform: translateX(-3px); }
+
 /* ---------- 7. Responsive ---------- */
 
 @media (min-width: 30rem) {

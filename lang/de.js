@@ -122,5 +122,6 @@ maI18n.register('de', {
   "Your message goes straight to my inbox through the form service Web3Forms.": "Ihre Nachricht geht über den Formulardienst Web3Forms direkt in mein Postfach.",
   "Sending...": "Wird gesendet...",
   "Thanks, I'll reply within one working day": "Danke, ich antworte innerhalb eines Werktages",
-  "Sorry, your note couldn't be sent. Please email me at {email}.": "Leider konnte Ihre Nachricht nicht gesendet werden. Bitte schreiben Sie mir direkt an {email}."
+  "Sorry, your note couldn't be sent. Please email me at {email}.": "Leider konnte Ihre Nachricht nicht gesendet werden. Bitte schreiben Sie mir direkt an {email}.",
+  "Privacy": "Datenschutz"
 });

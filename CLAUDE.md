@@ -5,7 +5,7 @@ One-page static website for **Morgan Automation**, a one-person AI automation bu
 ## Stack and constraints
 
 - Plain HTML, CSS and vanilla JavaScript. No frameworks, animation libraries, package managers or build step.
-- Files: `index.html`, `style.css`, `script.js`, `halftone.js`, `i18n.js`, `lang/*.js` (translations), `assets/brand/` (logo + icon), `assets/fonts/` (self-hosted woff2, plus chunked Noto Sans JP/SC). Relative paths only.
+- Files: `index.html`, `style.css`, `script.js`, `halftone.js`, `i18n.js`, `lang/*.js` (translations), `privacy.html` (separate privacy page, English only, linked from the main footer), `assets/brand/` (logo + icon), `assets/fonts/` (self-hosted woff2, plus chunked Noto Sans JP/SC). Relative paths only.
 - The page must work with JavaScript off: all content visible, accordion panels open, contact form posts normally to Web3Forms (which shows its own confirmation page). An inline script in `<head>` adds a `js` class and removes it after 3s if `script.js` never ran.
 - No runtime requests to other domains, with one approved exception: the contact form submits to `https://api.web3forms.com/submit`. Fonts are self-hosted: Fraunces (headings), DM Sans (body). Never use Inter, Roboto or Open Sans, and never link Google Fonts or other CDNs (GDPR). If Japanese text is added, self-host Noto Sans JP or BIZ UDGothic for it.
 
@@ -16,6 +16,7 @@ One-page static website for **Morgan Automation**, a one-person AI automation bu
 - Cookies or browser storage.
 - Any other form backend or third-party service without asking first. The contact form uses Web3Forms (owner-approved): `script.js` posts it as JSON with `fetch`, the visitor stays on the page and sees "Thanks, I'll reply within one working day" or an error with the email address. Field names are fixed: `access_key`, `subject`, `botcheck` (honeypot), `name`, `company`, `email`, `message`. The Web3Forms access key in `index.html` is public by design, not a secret; never add any other keys or tokens.
 - Never submit the real form while testing (it emails the owner). Mock `fetch` instead.
+- **Keep `privacy.html` in sync with reality.** If anything that touches personal data changes (form service, inbox provider, hosting, adding analytics, cookies or embeds), update the privacy page and its "Last updated" date in the same change.
 - New sections, testimonials, client logos, stats or prices that the owner hasn't supplied.
 
 ## Content

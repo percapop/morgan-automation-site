@@ -148,6 +148,11 @@
     swBtn.setAttribute('aria-expanded', String(open));
   }
   function updateSwitcher() {
+    // Links to other pages of the site (e.g. privacy.html) carry the chosen language along
+    document.querySelectorAll('a[data-keep-lang]').forEach(function (a) {
+      var base = a.getAttribute('href').split('?')[0];
+      a.setAttribute('href', current === 'en' ? base : base + '?lang=' + current);
+    });
     if (!sw) return;
     swCurrent.textContent = LANGS[current].short;
     sw.querySelectorAll('[data-lang-option]').forEach(function (a) {

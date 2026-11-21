@@ -167,7 +167,7 @@ Early clients get a discount in exchange for honest feedback and, if you're happ
 
 <!-- Not shown on the page (removed 2026-11-20). Kept here in case it comes back. -->
 
-Hi, I'm Percy Morgan. I build small, practical automations for food and trade businesses, from The Hague.
+Hi, I'm Perseus Morgan. I build small, practical automations for food and trade businesses, from The Hague.
 
 I grew up between Japan and international schools, studied economics in Tokyo, and now study International Studies at Leiden University. Before this I worked in restaurants, a Michelin-star kitchen, a farm and a ranch, so I know what a busy small business looks like from the inside.
 
@@ -233,3 +233,9 @@ Small AI automations, checked by a person.
 Morgan Automation · The Hague, Netherlands
 perseus@morganautomations.com
 [KvK number] · [Privacy policy] · © 2026 Morgan Automation
+
+---
+
+## Privacy page
+
+The privacy statement lives in `privacy.html` (English only), linked from the footer as "Privacy". Summary: no cookies, analytics or tracking; contact form messages (name, company, email, message) go through Web3Forms to a Google Workspace inbox and are used only to reply; hosted on GitHub Pages; GDPR rights and the Autoriteit Persoonsgegevens.

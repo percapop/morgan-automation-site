@@ -122,5 +122,6 @@ maI18n.register('ja', {
   "Your message goes straight to my inbox through the form service Web3Forms.": "メッセージはフォームサービス「Web3Forms」を通じて、私の受信箱に直接届きます。",
   "Sending...": "送信中…",
   "Thanks, I'll reply within one working day": "ありがとうございます。1営業日以内にご返信します",
-  "Sorry, your note couldn't be sent. Please email me at {email}.": "申し訳ありません。メッセージを送信できませんでした。{email} まで直接メールでご連絡ください。"
+  "Sorry, your note couldn't be sent. Please email me at {email}.": "申し訳ありません。メッセージを送信できませんでした。{email} まで直接メールでご連絡ください。",
+  "Privacy": "プライバシー"
 });

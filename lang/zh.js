@@ -122,5 +122,6 @@ maI18n.register('zh', {
   "Your message goes straight to my inbox through the form service Web3Forms.": "您的留言会通过表单服务 Web3Forms 直接发送到我的邮箱。",
   "Sending...": "正在发送……",
   "Thanks, I'll reply within one working day": "谢谢，我会在一个工作日内回复您",
-  "Sorry, your note couldn't be sent. Please email me at {email}.": "抱歉，留言未能发送。请直接发邮件至 {email}。"
+  "Sorry, your note couldn't be sent. Please email me at {email}.": "抱歉，留言未能发送。请直接发邮件至 {email}。",
+  "Privacy": "隐私政策"
 });
