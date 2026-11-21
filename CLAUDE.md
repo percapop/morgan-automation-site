@@ -5,6 +5,7 @@ One-page static website for **Morgan Automation**, a one-person AI automation bu
 ## Stack and constraints
 
 - Plain HTML, CSS and vanilla JavaScript. No frameworks, animation libraries, package managers or build step.
+- Live at https://morganautomations.com (GitHub Pages, branch `main`, root; `CNAME` file). DNS is at Namecheap.
 - Files: `index.html`, `style.css`, `script.js`, `halftone.js`, `i18n.js`, `lang/*.js` (translations), `privacy.html` (separate privacy page, English only, linked from the main footer), `assets/brand/` (logo + icon), `assets/fonts/` (self-hosted woff2, plus chunked Noto Sans JP/SC). Relative paths only.
 - The page must work with JavaScript off: all content visible, accordion panels open, contact form posts normally to Web3Forms (which shows its own confirmation page). An inline script in `<head>` adds a `js` class and removes it after 3s if `script.js` never ran.
 - No runtime requests to other domains, with one approved exception: the contact form submits to `https://api.web3forms.com/submit`. Fonts are self-hosted: Fraunces (headings), DM Sans (body). Never use Inter, Roboto or Open Sans, and never link Google Fonts or other CDNs (GDPR). If Japanese text is added, self-host Noto Sans JP or BIZ UDGothic for it.
@@ -47,7 +48,7 @@ One-page static website for **Morgan Automation**, a one-person AI automation bu
 - Halftone (`halftone.js`, WebGL, no libraries): riso print of `--red` + `--coral`, with a little `--lilac` as a light third ink (`tritone`), multiplied through `--paper`. All settings and presets (`riso`, `lilac`, `duo`) are at the top of the file. It sits behind the hero only, is absolutely positioned (no layout shift), never fades in on scroll, prints no ink behind the text block (`data-calm`), pauses offscreen, and is a static frame under reduced motion. Without WebGL the plain paper shows.
 - No CSS gradients, no box-shadows (use 1px borders), flat solid buttons.
 - One background change only where content changes: the contact section (ink). No alternating section backgrounds. The footer is paper, ruled off with a 1px ink line.
-- The logo mark is inline SVG in palette colours. `assets/brand/*.png` are still the old navy/blue artwork (only used for og:image and apple-touch-icon until re-exported).
+- The logo mark is inline SVG in palette colours. `assets/brand/apple-touch-icon.png` (512px) and `assets/brand/og-image.png` (1200×630 link-preview card) are rendered from it; re-render both if the logo, palette or tagline changes. The original navy/blue logo files in the repo root are the owner's source artwork, not used by the site.
 - Type: Fraunces 600 for headings, DM Sans for body. Hero `--fs-hero` (36→72px) is about 2× h2. Headings line-height 1.1–1.3 with −0.02em on large ones; body 1.6–1.8.
 - Layout: each section has its own structure (split + accordion, carousel, definition rows, prose, sticky box + FAQ, two-column form). Never three or more identical card grids. Text is left-aligned.
 - Hero is sized to its content: what, for whom, one action. No 100vh, no hero image unless it's a real photo of the work.
