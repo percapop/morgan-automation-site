@@ -33,6 +33,24 @@
       setTimeout(function () { if (!window.__maReady) c.remove('js'); }, 3000);
     })(document.documentElement.classList);
   </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Morgan Automation",
+      "url": "https://morganautomations.com/",
+      "email": "perseus@morganautomations.com",
+      "logo": "https://morganautomations.com/assets/brand/apple-touch-icon.png",
+      "image": "https://morganautomations.com/assets/brand/og-image.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "The Hague",
+        "addressCountry": "NL"
+      },
+      "areaServed": { "@type": "Place", "name": "Europe" },
+      "founder": { "@type": "Person", "name": "Perseus Morgan" }
+    }
+  </script>
   <script src="script.js" defer></script>
   <script src="halftone.js" defer></script>
   <script src="i18n.js" defer></script>
@@ -129,6 +147,7 @@
       <canvas class="halftone" data-halftone data-preset="riso" data-calm="#hero-content" aria-hidden="true"></canvas>
       <div class="container">
         <div class="hero-content" id="hero-content">
+          <p class="label hero-label">AI automation for small businesses in the Netherlands and Europe</p>
           <h1 id="hero-title" class="hero-title">
             <span class="line">Automation shouldn't need an IT department.</span>
             <span class="line line-quiet">I set it up, check it, and hand it over.</span>

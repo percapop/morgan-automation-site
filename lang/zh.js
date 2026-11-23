@@ -8,6 +8,7 @@ maI18n.register('zh', {
   "Let's talk": "聊一聊",
   "Automation shouldn't need an IT department.": "自动化，不该需要一个IT部门。",
   "I set it up, check it, and hand it over.": "我来搭建、检查，然后交给您。",
+  "AI automation for small businesses in the Netherlands and Europe": "面向荷兰及欧洲小型企业的 AI 自动化",
   "Who I work with": "服务对象",
   "Small teams who make, move or sell things:": "制造、运输或销售产品的小团队：",
   "Food producers": "食品生产商",

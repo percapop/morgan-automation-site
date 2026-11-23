@@ -12,6 +12,8 @@
 <!-- Headline is three short statements, one per line; the last one is in red.
      The subtitle says who it's for. One action only. No hero image until there's a real photo of the work. -->
 
+AI automation for small businesses in the Netherlands and Europe (small label above the headline)
+
 # Small businesses run on repetitive work. / Automation shouldn't need an IT department. / I set it up, check it, and hand it over.
 
 Small automations that use AI to find customers and save hours, built for small food and trade businesses in Europe.

@@ -8,6 +8,7 @@ maI18n.register('fr', {
   "Let's talk": "Parlons-en",
   "Automation shouldn't need an IT department.": "L'automatisation ne devrait pas exiger un service informatique.",
   "I set it up, check it, and hand it over.": "Je la mets en place, je la vérifie et je vous la remets.",
+  "AI automation for small businesses in the Netherlands and Europe": "Automatisation par l’IA pour les petites entreprises aux Pays-Bas et en Europe",
   "Who I work with": "Avec qui je travaille",
   "Small teams who make, move or sell things:": "Les petites équipes qui fabriquent, transportent ou vendent :",
   "Food producers": "Producteurs alimentaires",
